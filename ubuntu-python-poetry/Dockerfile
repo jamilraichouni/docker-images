@@ -15,6 +15,7 @@ RUN echo $TZ > /etc/timezone && \
     ln -s /usr/bin/python3.9 /usr/local/bin/python && \
     ln -s /usr/bin/python3.9 /usr/local/bin/python3 && \
     ln -s /usr/bin/python3.9 /usr/local/bin/python3.9 && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1 && \
     apt-get install --yes python3-pip && \
     apt-get clean && \
     pip install --no-cache-dir poetry poetry-dynamic-versioning
