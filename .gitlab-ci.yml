@@ -1,4 +1,6 @@
 default:
+  tags:
+    - shell
   before_script:
     - docker info
 
