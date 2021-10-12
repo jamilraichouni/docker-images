@@ -3,13 +3,18 @@ default:
     - shell
   before_script:
     - docker info
+    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
 
 stages:
   - deploy
 
-ubuntu-python-poetry:
+ubuntu:
   stage: deploy
+  only:
+    refs:
+      - branches
+    changes:
+      - ubuntu/Dockerfile
   script:
-    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
-    - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu-python-poetry:latest ubuntu-python-poetry
-    - docker push registry.gitlab.com/jar1/docker-images/ubuntu-python-poetry:latest
+    - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu:latest ubuntu
+    - docker push registry.gitlab.com/jar1/docker-images/ubuntu:latest
