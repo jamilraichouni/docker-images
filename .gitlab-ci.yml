@@ -26,7 +26,7 @@ python:
     refs:
       - branches
     changes:
-      - Dockerfile
+      - .gitlab-ci.yml
       - python/Dockerfile
   script:
     - docker build -t registry.gitlab.com/jar1/python:latest python
