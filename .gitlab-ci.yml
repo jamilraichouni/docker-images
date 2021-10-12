@@ -18,3 +18,14 @@ ubuntu:
   script:
     - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu:latest ubuntu
     - docker push registry.gitlab.com/jar1/docker-images/ubuntu:latest
+
+python:
+  stage: deploy
+  only:
+    refs:
+      - branches
+    changes:
+      - python/Dockerfile
+  script:
+    - docker build -t registry.gitlab.com/jar1/docker-images/python:latest python
+    - docker push registry.gitlab.com/jar1/docker-images/python:latest
