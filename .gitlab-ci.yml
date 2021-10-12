@@ -17,8 +17,8 @@ ubuntu:
       - Dockerfile
       - ubuntu/Dockerfile
   script:
-    - docker build -t registry.gitlab.com/jar1/ubuntu:latest ubuntu
-    - docker push registry.gitlab.com/jar1/ubuntu:latest
+    - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu:latest ubuntu
+    - docker push registry.gitlab.com/jar1/docker-images/ubuntu:latest
 
 python:
   stage: deploy
@@ -29,5 +29,5 @@ python:
       - .gitlab-ci.yml
       - python/Dockerfile
   script:
-    - docker build -t registry.gitlab.com/jar1/python:latest python
-    - docker push registry.gitlab.com/jar1/python:latest
+    - docker build -t registry.gitlab.com/jar1/docker-images/python:latest python
+    - docker push registry.gitlab.com/jar1/docker-images/python:latest
