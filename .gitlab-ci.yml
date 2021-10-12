@@ -14,7 +14,7 @@ ubuntu:
     refs:
       - branches
     changes:
-      - Dockerfile
+      - .gitlab-ci.yml
       - ubuntu/Dockerfile
   script:
     - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu:latest ubuntu
