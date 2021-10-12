@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 LABEL maintainer "Jamil André RAICHOUNI <raichouni@gmail.com>"
+ENV SHELL = "/bin/bash"  # needed by poetry shell
 ENV TZ="Europe/Berlin"
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
 RUN echo $TZ > /etc/timezone && \
