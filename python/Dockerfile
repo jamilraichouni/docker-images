@@ -13,7 +13,9 @@ RUN apt-get purge --auto-remove python3* --yes && \
     apt autoremove --yes && \
     apt-get install --yes --no-install-recommends python3-pip && \
     apt-get clean && \
+    ln -s /usr/bin/python3.9 /usr/local/bin/python && \
     ln -s /usr/bin/python3.9 /usr/local/bin/python3 && \
+    update-alternatives --install /usr/local/bin/python python3 /usr/bin/python3.9 1 && \
     update-alternatives --install /usr/local/bin/python3 python3 /usr/bin/python3.9 1 && \
     export PATH=/usr/local/bin:$PATH && \
     rm /usr/bin/python3 && \
