@@ -14,10 +14,11 @@ ubuntu:
     refs:
       - branches
     changes:
+      - Dockerfile
       - ubuntu/Dockerfile
   script:
-    - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu:latest ubuntu
-    - docker push registry.gitlab.com/jar1/docker-images/ubuntu:latest
+    - docker build -t registry.gitlab.com/jar1/ubuntu:latest ubuntu
+    - docker push registry.gitlab.com/jar1/ubuntu:latest
 
 python:
   stage: deploy
@@ -25,7 +26,8 @@ python:
     refs:
       - branches
     changes:
+      - Dockerfile
       - python/Dockerfile
   script:
-    - docker build -t registry.gitlab.com/jar1/docker-images/python:latest python
-    - docker push registry.gitlab.com/jar1/docker-images/python:latest
+    - docker build -t registry.gitlab.com/jar1/python:latest python
+    - docker push registry.gitlab.com/jar1/python:latest

@@ -1,7 +1,6 @@
 FROM registry.gitlab.com/jar1/docker-images/ubuntu:latest
 LABEL maintainer "Jamil André RAICHOUNI <raichouni@gmail.com>"
 ENV TZ="Europe/Berlin"
-ENV POETRY_VIRTUALENVS_IN_PROJECT="true"
 RUN apt-get purge --auto-remove python3* --yes && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
