@@ -1,5 +1,5 @@
 ARG DOCKER_REGISTRY
-FROM ${DOCKER_REGISTRY}/jar1/ubuntu:latest
+FROM ${DOCKER_REGISTRY}/ubuntu:latest
 LABEL maintainer "Jamil André RAICHOUNI <raichouni@gmail.com>"
 ENV TZ="Europe/Berlin"
 RUN apt-get purge --auto-remove python3* --yes && \
