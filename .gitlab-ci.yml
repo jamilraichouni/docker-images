@@ -24,6 +24,8 @@ fetch-dockerfiles:
   artifacts:
     paths:
       - $CI_PROJECT_DIR
+    exclude:
+      - .git/
 
 ubuntu:
   stage: deploy
