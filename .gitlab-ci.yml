@@ -30,9 +30,6 @@ ubuntu:
   needs: ["fetch-dockerfiles"]
   dependencies:
     - "fetch-dockerfiles"
-  only:
-    changes:
-      - $CI_JOB_NAME/Dockerfile
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:latest $CI_JOB_NAME
 
@@ -40,10 +37,6 @@ ubuntu-python:
   needs: ["fetch-dockerfiles"]
   dependencies:
     - "fetch-dockerfiles"
-  only:
-    changes:
-      - ubuntu/Dockerfile
-      - $CI_JOB_NAME/Dockerfile
   extends: "ubuntu"
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
@@ -54,9 +47,6 @@ alpine-python:
   needs: ["fetch-dockerfiles"]
   dependencies:
     - "fetch-dockerfiles"
-  only:
-    changes:
-      - $CI_JOB_NAME/Dockerfile
   extends: "ubuntu-python"
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
@@ -66,9 +56,6 @@ debian-python:
   needs: ["fetch-dockerfiles"]
   dependencies:
     - "fetch-dockerfiles"
-  only:
-    changes:
-      - $CI_JOB_NAME/Dockerfile
   script:
     - docker build -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
   after_script:
