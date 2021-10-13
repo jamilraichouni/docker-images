@@ -28,6 +28,6 @@ ubuntu-python:
 alpine-python:
   stage: deploy
   extends: "ubuntu-python"
-  needs: [""]
+  needs: []
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
