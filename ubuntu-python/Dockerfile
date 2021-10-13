@@ -21,5 +21,5 @@ RUN apt-get purge --auto-remove python3* --yes && \
     rm /usr/bin/python3 && \
     rm /usr/bin/pip* && \
     ln -s /usr/bin/python3.9 /usr/bin/python3 && \
-    python3 -m pip install --no-cache-dir anybadge poetry poetry-dynamic-versioning
+    python3 -m pip install --no-cache-dir anybadge poetry poetry-dynamic-versioning toml
 CMD ["/bin/bash"]
