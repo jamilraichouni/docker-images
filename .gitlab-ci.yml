@@ -15,7 +15,13 @@ ubuntu:
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:latest $CI_JOB_NAME
 
-python:
-  stage: deploy
+python-ubuntu:
   needs: ["ubuntu"]
   extends: "ubuntu"
+  script:
+    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:3.9.7 $CI_JOB_NAME
+
+python-alpine:
+  stage: deploy
+  script:
+    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:3.9.7 $CI_JOB_NAME
