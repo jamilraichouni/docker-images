@@ -23,9 +23,7 @@ fetch-dockerfiles:
     - echo "Fetch Dockerfiles"
   artifacts:
     paths:
-      - $CI_PROJECT_DIR
-    exclude:
-      - .git/
+      - "*/Dockerfile"
 
 ubuntu:
   stage: deploy
