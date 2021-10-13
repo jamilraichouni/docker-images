@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     apt-get install --yes git && \
     apt autoremove --yes && \
     apt-get clean && \
-    find /usr/local/lib/python3.9 -depth -type d -name '__pycache__' -exec rm -Rf {} \ && \
-    find /usr/local/lib/python3.9 -depth -type f -name '*.pyc' -exec rm -f {} \ && \
+    find /usr/local/lib/python3.9 -depth -type d -name '__pycache__' -exec rm -Rf {} \; && \
+    find /usr/local/lib/python3.9 -depth -type f -name '*.pyc' -exec rm -f {} \; && \
     rm -rf /var/lib/apt/lists/
 CMD ["/bin/sh"]
