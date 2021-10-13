@@ -7,27 +7,46 @@ default:
   after_script:
     - docker push $DOCKER_REGISTRY/$CI_JOB_NAME:latest
 
+variables:
+  PY_VERSION: 3.9.7
+  GIT_STRATEGY: none
+
 stages:
+  - environment
   - deploy
+
+fetch-dockerfiles:
+  stage: environment
+  variables:
+    GIT_STRATEGY: fetch
+  script:
+    - echo "Fetch Dockerfiles"
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR
 
 ubuntu:
   stage: deploy
+  needs: ["fetch-dockerfiles"]
+  dependencies:
+    - "fetch-dockerfiles"
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:latest $CI_JOB_NAME
 
 ubuntu-python:
-  needs: ["ubuntu"]
+  needs: ["fetch-dockerfiles"]
+  dependencies:
+    - "fetch-dockerfiles"
   extends: "ubuntu"
-  variables:
-    PY_VERSION: 3.9.7
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
   after_script:
-    - docker push $DOCKER_REGISTRY/$CI_JOB_NAME:3.9.7
+    - docker push $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION
 
 alpine-python:
-  stage: deploy
+  needs: ["fetch-dockerfiles"]
+  dependencies:
+    - "fetch-dockerfiles"
   extends: "ubuntu-python"
-  needs: []
   script:
     - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
