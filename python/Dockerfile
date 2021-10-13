@@ -1,4 +1,5 @@
-FROM registry.gitlab.com/jar1/docker-images/ubuntu:latest
+ARG DOCKER_REGISTRY
+FROM ${DOCKER_REGISTRY}/jar1/ubuntu:latest
 LABEL maintainer "Jamil André RAICHOUNI <raichouni@gmail.com>"
 ENV TZ="Europe/Berlin"
 RUN apt-get purge --auto-remove python3* --yes && \

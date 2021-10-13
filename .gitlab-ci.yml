@@ -11,12 +11,12 @@ stages:
 ubuntu:
   stage: deploy
   script:
-    - docker build -t registry.gitlab.com/jar1/docker-images/ubuntu:latest ubuntu
-    - docker push registry.gitlab.com/jar1/docker-images/ubuntu:latest
+    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/ubuntu:latest ubuntu
+    - docker push $DOCKER_REGISTRY/ubuntu:latest
 
 python:
   stage: deploy
   needs: ["ubuntu"]
   script:
-    - docker build -t registry.gitlab.com/jar1/docker-images/python:latest python
-    - docker push registry.gitlab.com/jar1/docker-images/python:latest
+    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/python:latest python
+    - docker push $DOCKER_REGISTRY/python:latest
