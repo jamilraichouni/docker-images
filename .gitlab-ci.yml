@@ -18,5 +18,4 @@ ubuntu:
 python:
   stage: deploy
   needs: ["ubuntu"]
-  script:
-    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:latest $CI_JOB_NAME
+  extends: "ubuntu"
