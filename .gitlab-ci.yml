@@ -7,56 +7,31 @@ default:
   after_script:
     - docker push $DOCKER_REGISTRY/$CI_JOB_NAME:latest
 
-variables:
-  PY_VERSION: 3.9.7
-  GIT_STRATEGY: none
-
 stages:
-  - environment
   - deploy
 
-fetch-dockerfiles:
-  stage: environment
-  variables:
-    GIT_STRATEGY: fetch
-  script:
-    - echo "Fetch Dockerfiles"
-  artifacts:
-    paths:
-      - "*/Dockerfile"
+variables:
+  DOCKER_BUILD_CMD: "docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:latest $CI_JOB_NAME"
 
 ubuntu:
   stage: deploy
-  needs: ["fetch-dockerfiles"]
-  dependencies:
-    - "fetch-dockerfiles"
+  rules:
+    - changes:
+        - $CI_JOB_NAME/Dockerfile
   script:
-    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:latest $CI_JOB_NAME
+    - $DOCKER_BUILD_CMD
 
-ubuntu-python:
-  needs: ["fetch-dockerfiles"]
-  dependencies:
-    - "fetch-dockerfiles"
+ubuntu-python3.9.7:
   extends: "ubuntu"
   script:
-    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
-  after_script:
-    - docker push $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION
+    - $DOCKER_BUILD_CMD
 
-alpine-python:
-  needs: ["fetch-dockerfiles"]
-  dependencies:
-    - "fetch-dockerfiles"
-  extends: "ubuntu-python"
+alpine-python3.9.7:
+  extends: "ubuntu"
   script:
-    - docker build --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
+    - $DOCKER_BUILD_CMD
 
-debian-python:
-  stage: deploy
-  needs: ["fetch-dockerfiles"]
-  dependencies:
-    - "fetch-dockerfiles"
+debian-python3.9.7:
+  extends: "ubuntu"
   script:
-    - docker build -t $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION $CI_JOB_NAME
-  after_script:
-    - docker push $DOCKER_REGISTRY/$CI_JOB_NAME:$PY_VERSION
+    - $DOCKER_BUILD_CMD
