@@ -35,3 +35,8 @@ debian-python3.9.7:
   extends: "ubuntu"
   script:
     - $DOCKER_BUILD_CMD
+
+debian-python3.10.0:
+  extends: "ubuntu"
+  script:
+    - $DOCKER_BUILD_CMD
