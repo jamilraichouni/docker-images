@@ -5,6 +5,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir anybadge poetry poetry-dynamic-versioning toml && \
     apt-get update && \
     apt-get install --yes git && \
+    apt-get install --yes vim && \
     git config --global init.defaultBranch main && \
     apt autoremove --yes && \
     apt-get clean && \
