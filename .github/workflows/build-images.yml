@@ -8,5 +8,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Docker image
         run: docker build -t ghcr.io/jamilraichouni/debian-python3.10.0:latest debian-python3.10.0
+      - name: Log in to GitHub container registry
+        # This is where you will update the PAT to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Push Docker image
         run: docker push ghcr.io/jamilraichouni/debian-python3.10.0:latest
