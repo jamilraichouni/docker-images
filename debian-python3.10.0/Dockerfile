@@ -1,5 +1,6 @@
 FROM python:3.10.0-slim-buster
 LABEL maintainer "Jamil André RAICHOUNI <raichouni@gmail.com>"
+LABEL org.opencontainers.image.source https://github.com/jamilraichouni/docker-images
 ENV TZ="Europe/Berlin"
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir anybadge poetry poetry-dynamic-versioning toml && \
