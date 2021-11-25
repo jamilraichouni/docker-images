@@ -1,2 +1,6 @@
-.env
+# Apple Desktop Services Store:
+.DS_Store
 
+
+# Personal environment variable definition file:
+.env
