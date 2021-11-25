@@ -4,7 +4,9 @@ jobs:
   build-images:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Build docker image
-      - run: docker build -t ghcr.io/jamilraichouni/debian-python3.10.0:latest debian-python3.10.0
-      - run: docker push ghcr.io/jamilraichouni/debian-python3.10.0:latest
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t ghcr.io/jamilraichouni/debian-python3.10.0:latest debian-python3.10.0
+      - name: Push Docker image
+        run: docker push ghcr.io/jamilraichouni/debian-python3.10.0:latest
