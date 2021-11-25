@@ -1,10 +1,10 @@
 name: build-images
 on: push
 jobs:
-  build-images:
+  build-debian-python310:
+    name: Build debian-python3.10.0
     runs-on: ubuntu-latest
     steps:
-      - name: Build docker image
       - uses: actions/checkout@v2
       - name: Build Docker image
         run: docker build -t ghcr.io/jamilraichouni/debian-python3.10.0:latest debian-python3.10.0
