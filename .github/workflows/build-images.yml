@@ -1,5 +1,7 @@
 name: build-images
 on: push
+permissions:
+  packages: write
 jobs:
   build-debian-python310:
     name: Build debian-python3.10.0
@@ -12,4 +14,5 @@ jobs:
         # This is where you will update the PAT to GITHUB_TOKEN
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Push Docker image
+        # Push the image
         run: docker push ghcr.io/jamilraichouni/debian-python3.10.0:latest
